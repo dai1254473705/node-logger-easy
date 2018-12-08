@@ -1,0 +1,26 @@
+{
+  "name": "node-logger-easy",
+  "version": "1.0.0",
+  "description": "Export the log to the console or file, customize the output log format, support sending mail to the designated mailbox;",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dai1254473705/node-logger-easy.git"
+  },
+  "keywords": [
+    "logger",
+    "javascript",
+    "express",
+    "email",
+    "node"
+  ],
+  "author": "Yunzhou Dai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dai1254473705/node-logger-easy/issues"
+  },
+  "homepage": "https://github.com/dai1254473705/node-logger-easy#readme"
+}
