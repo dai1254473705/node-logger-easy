@@ -15,6 +15,10 @@ Export the log to the console or file, customize the output log format, support 
 ```
 ## USE
 
+> colors
+
+![colors](./src/images/color.jpg)
+
 ## API
 
 ### attention
