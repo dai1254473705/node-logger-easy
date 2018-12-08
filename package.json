@@ -1,6 +1,6 @@
 {
   "name": "node-logger-easy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Export the log to the console or file, customize the output log format, support sending mail to the designated mailbox;",
   "main": "index.js",
   "private": true,
