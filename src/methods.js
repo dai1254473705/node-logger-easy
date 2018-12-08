@@ -11,20 +11,20 @@ const Print = require('./print');
 function Logger (props){
     Init.call(this,props);
     Print.call(this,props);
-    this.trance= function (data){
+    this.trance= function (data,options){
         try {
             // 控制台输出
-            this.output('trance',data);
+            this.output('trance',data,options);
             //文件输出
             // ...todo
         } catch (error) {
             this.catchErr(error);
         }
     };
-    this.debug= function (data){
+    this.debug= function (data,options){
         try {
             // 控制台输出
-            this.output('debug',data);
+            this.output('debug',data,options);
             //文件输出
             // ...todo
         } catch (error) {
@@ -32,40 +32,40 @@ function Logger (props){
         }
     };
 
-    this.info=function (data){
+    this.info=function (data,options){
         try {
             // 控制台输出
-            this.output('info',data);
+            this.output('info',data,options);
             //文件输出
             // ...todo
         } catch (error) {
             this.catchErr(error);
         }
     };
-    this.warn =function (data){
+    this.warn =function (data,options){
         try {
             // 控制台输出
-            this.output('warn',data);
+            this.output('warn',data,options);
             //文件输出
             // ...todo
         } catch (error) {
             this.catchErr(error);
         }
     };
-    this.error= function (data){
+    this.error= function (data,options){
         try {
             // 控制台输出
-            this.output('error',data);
+            this.output('error',data,options);
             //文件输出
             // ...todo
         } catch (error) {
             this.catchErr(error);
         }
     };
-    this.fatal =function (data){
+    this.fatal =function (data,options){
         try {
             // 控制台输出
-            this.output('fatal',data);
+            this.output('fatal',data,options);
             //文件输出
             // ...todo
         } catch (error) {
