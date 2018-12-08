@@ -25,6 +25,7 @@ Not completed, ongoing updates
 [MIT](LICENSE)
 
 Copyright (c) 2018-present, Yunzhou Dai
+
 [npm-image]: https://img.shields.io/npm/v/node-logger-easy.svg
 [npm-url]: https://npmjs.org/package/node-logger-easy
 [node-version-image]: https://img.shields.io/node/v/node-logger-easy.svg
