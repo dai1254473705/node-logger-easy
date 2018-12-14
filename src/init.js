@@ -9,8 +9,8 @@
  * @param {*} props
  */
 function Init (props){
-    console.log('-----props------');
-    console.log(props);
+    // console.log('-----props------');
+    // console.log(props);
     // catch logger error 
     this.catchErr= function (error) {
         throw new Error(error);

@@ -31,15 +31,24 @@ function Print (props){
 
     // ['black','red','green','yellow','blue','magenta','cyan','white','gray','redBright','greenBright','yellowBright','blueBright','magentaBright','cyanBright','whiteBright']
     // appenders
-    this.format= function (level,data,options){
+    this.format= function (level,dataObj,options){
+        let data = typeof dataObj === 'object' ? JSON.stringify(dataObj):dataObj;
         let res = props.format || {};
         let datePattern = res.datePattern || '';
         let time = moment().format(datePattern);
         let address = ip.address();
-        let levels = this.color()[level](level);
-        let dataString = options.color ? chalk[options.color](data) : data;
-
-        return `[${time}]-[${address}]-${levels}-${dataString}`;
+        if (options.json) {
+            let levels = level;
+            return {
+                time: time,
+                levels: levels,
+                dataString: data,
+            };
+        } else {
+            let levels = this.color()[level](level);
+            let dataString = options.color ? chalk[options.color](data) : data;
+            return `[${time}]-${levels}-${dataString}`;
+        }
     };
 
     this.output = function (level = 'trance',data,options = {}){

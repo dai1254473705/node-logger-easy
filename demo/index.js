@@ -24,3 +24,4 @@ logger.info('哈哈哈哈哈哈哈');
 logger.warn('哈哈哈哈哈哈哈');
 logger.error('哈哈哈哈哈哈哈');
 logger.fatal('哈哈哈哈哈哈哈');
+logger.warn({haha: 213,asdf: 'sdf'},{color: 'blue',json: true});
