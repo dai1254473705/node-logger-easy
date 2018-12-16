@@ -15,7 +15,11 @@ const ip = require('ip');
  * @param {*} data
  */
 function Print (props){
-    
+    this.state = {
+        params: ['time','serverIp','level','message','pid'], //输出格式顺序
+        type: '',// 输出格式是json或者string
+        datePattern: '',// 时间格式化
+    };
     // ['black','red','green','yellow','blue','magenta','cyan','white','gray','redBright','greenBright','yellowBright','blueBright','magentaBright','cyanBright','whiteBright']
     this.color= function (){
         let res = props.color || {};
@@ -34,25 +38,59 @@ function Print (props){
     this.format= function (level,dataObj,options){
         let data = typeof dataObj === 'object' ? JSON.stringify(dataObj):dataObj;
         let res = props.format || {};
-        let datePattern = res.datePattern || '';
+
+        let datePattern = res.datePattern || this.state.datePattern;
+        let type = res.type || this.state.type;
+        let params = res.params || this.state.params;
+
         let time = moment().format(datePattern);
         let address = ip.address();
-        if (options.json) {
-            let levels = level;
-            return {
-                time: time,
-                levels: levels,
-                dataString: data,
-            };
+
+        // 默认所有的参数
+        let defaultResult = {
+            time: time,
+            serverIp: address,
+            level: level,
+            message: data,
+            pid: process.pid
+        };
+
+        if (type === 'json' || type === 'jsonString') {
+            let myResult = {};
+
+            // 当前需要输出的参数
+            for (let i in params) {
+                if (defaultResult[params[i]]) {
+                    myResult[params[i]] = defaultResult[params[i]];
+                }
+            }
+
+            if (type === 'json') {
+                return myResult;
+            } else {
+                
+                return options.color ? chalk[options.color](JSON.stringify(myResult)) : JSON.stringify(myResult);
+            }
         } else {
-            let levels = this.color()[level](level);
-            let dataString = options.color ? chalk[options.color](data) : data;
-            return `[${time}]-${levels}-${dataString}`;
+            // let levels = this.color()[level](level);
+            let stringResult = '';
+            // 当前需要输出的参数
+            for (let j in params) {
+                if (defaultResult[params[j]]) {
+                    stringResult += defaultResult[params[j]]+'-';
+                }
+            }
+            let dataString = stringResult.replace(/-$/,'');
+            return options.color ? chalk[options.color](dataString) : dataString;
         }
     };
 
     this.output = function (level = 'trance',data,options = {}){
         try {
+            let res = props.format || {};
+            if (!res.console && typeof res.console === 'boolean'){
+                return false;
+            }
             switch (level){
                 case 'trance':
                     console.log(this.format(level,data,options));
@@ -79,5 +117,6 @@ function Print (props){
             throw new Error(e);
         }
     };
-};
+}
+
 module.exports = Print;
