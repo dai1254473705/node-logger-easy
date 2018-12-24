@@ -6,9 +6,10 @@
 var nodeLoggerEasy = require('../index');
 var logger = new nodeLoggerEasy({
     format: {
-        datePattern: 'YYYY-MM-DD HH:mm:ss',
+        datePattern: 'YYYYMMDDHHmm',
         encoding: 'utf-8',
-        type: 'string', // string || json(颜色不生效) || jsonString 
+        extension: 'log',// [log,txt]file extension
+        type: 'json', // string || json(颜色不生效) || jsonString 
         params: ['time','serverIp','level','message','pid'], //输出格式顺序
         console: true, // 是否在控制台输出,默认true
     },

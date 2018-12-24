@@ -12,6 +12,7 @@
 const _ = require('lodash');
 const fse = require('fs-extra');
 const fs = require('fs');
+const moment = require('moment');
 
 /**
  * @export
@@ -71,14 +72,24 @@ function WriteFile (props){
             this.catchErr(error);
         }
     };
-
+    // get file path 
+    this.filePath = function (path){
+        try {
+            let format = props.format || {};
+            let time = format.datePattern || 'YYYY-MM-DD';
+            let extension = format.extension || 'log';
+            let fileName = moment().format(time);
+            return path + '/' + fileName + '.' + extension;
+        } catch (error) {
+            this.catchErr(error);
+        }
+    };
     // write logs to file 
     this.outputLogToFile = function (path,data){
         try {
             // With a callback:
-            fs.appendFile(path +'/2018-12-23.log', data+'\n', function (err){
+            fs.appendFile(this.filePath(path), data+'\n', function (err){
                 if (err) throw err;
-                console.log('数据已追加到文件');
             });
         } catch (error) {
             this.catchErr(error);
