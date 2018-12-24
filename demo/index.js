@@ -6,10 +6,10 @@
 var nodeLoggerEasy = require('../index');
 var logger = new nodeLoggerEasy({
     format: {
-        datePattern: 'YYYYMMDDHHmm',
+        datePattern: 'YYYYMMDDHHmmss',
         encoding: 'utf-8',
         extension: 'log',// [log,txt]file extension
-        type: 'json', // string || json(颜色不生效) || jsonString 
+        type: 'jsonString', // string || json(颜色不生效) || jsonString 
         params: ['time','serverIp','level','message','pid'], //输出格式顺序
         console: true, // 是否在控制台输出,默认true
     },
@@ -29,10 +29,4 @@ var logger = new nodeLoggerEasy({
         fatal: 'redBright'
     }
 });
-logger.trance('哈哈哈哈哈哈哈',{color: 'blue'});
-logger.debug('哈哈哈哈哈哈哈',{color: 'redBright'});
-logger.info('哈哈哈哈哈哈哈');
-logger.warn('哈哈哈哈哈哈哈');
-logger.error('哈哈哈哈哈哈哈');
-logger.fatal('哈哈哈哈哈哈哈');
-logger.warn({haha: 213,asdf: 'sdf'},{color: 'blue',json: true});
+module.exports = logger;
