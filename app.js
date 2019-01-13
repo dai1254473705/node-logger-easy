@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const logger = require('./demo');
+const cluster = require('cluster');
 
 app.get('/', function (req, res) {
     logger.trance('哈哈哈哈哈哈哈',{color: 'blue'});
@@ -9,7 +10,7 @@ app.get('/', function (req, res) {
     logger.warn('哈哈哈哈哈哈哈');
     logger.error('哈哈哈哈哈哈哈');
     logger.fatal('哈哈哈哈哈哈哈');
-    logger.warn({haha: 213,asdf: 'sdf'},{color: 'blue',json: true});
+    logger.warn({haha: 213,asdf: 'sdf'},{color: 'blue'});
     res.send('Hello World!');
 });
 

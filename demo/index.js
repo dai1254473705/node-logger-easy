@@ -1,25 +1,26 @@
 /**
  * test
  * index.js
- * ['black','red','green','yellow','blue','magenta','cyan','white','gray','redBright','greenBright','yellowBright','blueBright','magentaBright','cyanBright','whiteBright']
  */
-var nodeLoggerEasy = require('../index');
-var logger = new nodeLoggerEasy({
+const nodeLoggerEasy = require('../index');
+const logger = new nodeLoggerEasy({
     format: {
         datePattern: 'YYYYMMDDHHmmss',
-        encoding: 'utf-8',
         extension: 'log',// [log,txt]file extension
-        type: 'jsonString', // string || json(颜色不生效) || jsonString 
-        params: ['time','serverIp','level','message','pid'], //输出格式顺序
-        console: true, // 是否在控制台输出,默认true
+        type: 'jsonString', // string || json(no color) || jsonString 
+        params: ['time','serverIp','level','message','pid'], //set default log params
+        paramsTimeFormat: 'YYYY年MM月DD日HH时mm分ss秒',// logs time format,use moment.js ,for example[YYYYMMDDHHmmss,YYYY年MM月DD日HH时mm分ss秒]
+        console: true, // if you want see the logs in terminal; default:true
     },
-    // 日志文件设置 TODO
+    // if you want to out put log to file
     file: {
-        save: true, // 是否生成文件，默认false 
-        path: './logs/',// 日志文件地址,多级文件自动生成
-        saveLevel: ['error','warn','haha'],//需要分级保存的登记,如果不填则不分级保存，默认 []
-        saveDay: 7,// 保存时间 || 0不删除，默认0
+        save: true, // is create log files,default:false 
+        path: './logs/',// logs dir path,auto create dir
+        saveLevel: ['error','warn'],//set the level you want to save,default: [] , all level: ['trance', 'debug', 'info', 'warn', 'error', 'fatal']
+        saveDay: 7,// save days,if '0',will not delete;default : 0
     },
+    // set color if you like 
+    // ['black','red','green','yellow','blue','magenta','cyan','white','gray','redBright','greenBright','yellowBright','blueBright','magentaBright','cyanBright','whiteBright']
     color: {
         trance: 'yellow',
         debug: 'blue',
@@ -27,6 +28,8 @@ var logger = new nodeLoggerEasy({
         warn: 'white',
         error: 'gray',
         fatal: 'redBright'
-    }
+    },
+    // you should set false or not set on production env;
+    debug: true // some logs
 });
 module.exports = logger;

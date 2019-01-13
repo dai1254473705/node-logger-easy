@@ -5,38 +5,69 @@ Export the log to the console or file, customize the output log format, support 
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Node.js Version][node-version-image]][node-version-url]
 
-## desciption 
+## Desc
+
+If you want to see more:
+	1. 'git clone git@github.com:dai1254473705/node-logger-easy.git';
+	2. 'npm install'
+	3. 'npm run test'
 
 ## Installation
-```sh
-`npm install node-logger-easy --save` || `cnpm install node-logger-easy --save`
-```
-## USE
 
-> colors
+```sh
+`npm install node-logger-easy --save` || `cnpm install node-logger-easy --save` || `yarn add node-logger-easy`
+```
+
+## colors
+
+> all colors :
+
++ 'black'
++ 'red'
++ 'green'
++ 'yellow'
++ 'blue'
++ 'magenta'
++ 'cyan'
++ 'white'
++ 'gray'
++ 'redBright'
++ 'greenBright'
++ 'yellowBright'
++ 'blueBright'
++ 'magentaBright'
++ 'cyanBright'
++ 'whiteBright'
 
 ![colors](./src/images/color.jpg)
 
-## API
 
 ## example
 
 ```sh
-var logger = new nodeLoggerEasy({
+/**
+ * test
+ * index.js
+ */
+const nodeLoggerEasy = require('../index');
+const logger = new nodeLoggerEasy({
     format: {
-        datePattern: 'YYYY-MM-DD HH:mm:ss',
-        encoding: 'utf-8',
-        type: 'json', // string || json(颜色不生效) || jsonString 
-        params: ['time','serverIp','level','message','pid'], //输出格式顺序
-        console: true, // 是否在控制台输出,默认true
+        datePattern: 'YYYYMMDDHHmmss',
+        extension: 'log',// [log,txt]file extension
+        type: 'jsonString', // string || json(no color) || jsonString 
+        params: ['time','serverIp','level','message','pid'], //set default log params
+        paramsTimeFormat: 'YYYY年MM月DD日HH时mm分ss秒',// logs time format,use moment.js ,for example[YYYYMMDDHHmmss,YYYY年MM月DD日HH时mm分ss秒]
+        console: true, // if you want see the logs in terminal; default:true
     },
-    // 日志文件设置 TODO 未完成保存文件功能
+    // if you want to out put log to file
     file: {
-        save: true, // 是否生成文件，默认false 
-        path: './logs/',// 日志文件地址,多级文件自动生成
-        saveLevel: ['error','warn'],//需要分级保存的登记,如果不填则不分级保存，默认 []
-        saveDay: 7,// 保存时间 || 0不删除，默认0
+        save: true, // is create log files,default:false 
+        path: './logs/',// logs dir path,auto create dir
+        saveLevel: ['error','warn'],//set the level you want to save,default: [] , all level: ['trance', 'debug', 'info', 'warn', 'error', 'fatal']
+        saveDay: 7,// save days,if '0',will not delete;default : 0
     },
+    // set color if you like 
+    // ['black','red','green','yellow','blue','magenta','cyan','white','gray','redBright','greenBright','yellowBright','blueBright','magentaBright','cyanBright','whiteBright']
     color: {
         trance: 'yellow',
         debug: 'blue',
@@ -44,8 +75,16 @@ var logger = new nodeLoggerEasy({
         warn: 'white',
         error: 'gray',
         fatal: 'redBright'
-    }
+    },
+    // you should set false or not set on production env;
+    debug: true // some logs
 });
+module.exports = logger;
+```
+
+### use
+
+```sh
 logger.trance('哈哈哈哈哈哈哈',{color: 'blue'});
 logger.debug('哈哈哈哈哈哈哈',{color: 'redBright'});
 logger.info('哈哈哈哈哈哈哈');
@@ -54,8 +93,39 @@ logger.error('哈哈哈哈哈哈哈');
 logger.fatal('哈哈哈哈哈哈哈');
 logger.warn({haha: 213,asdf: 'sdf'},{color: 'blue',json: true});
 ```
+
+### method 
+
+> logger\[level](message,options);
+
++ messages:
+
+	---logger.info(String);
+	
+	---logger.info(String,options);
+	
+	---logger.info(Object);
+	
+	---logger.info(Object,options);
+
++ options
+
+> {color: 'blue'}
+
+You can specify the log color of the current output，Only show color in terminal；
+
+> all levels: ['trance', 'debug', 'info', 'warn', 'error', 'fatal']
+
++ logger.trance
++ logger.debug
++ logger.info
++ logger.warn
++ logger.error
++ logger.fatal
+
+
 ### attention
-Not completed, ongoing updates
+email Not completed, ongoing updates
 
 ## License
 

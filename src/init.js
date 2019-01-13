@@ -23,7 +23,10 @@ function Init (props) {
 		params: ['time', 'serverIp', 'level', 'message', 'pid'], //output params
 		type: 'string', // output type : `json` or `string`,default:string
 		datePattern: '', // time format
+		paramsTimeFormat: props.format.paramsTimeFormat || null,
 		level: ['trance', 'debug', 'info', 'warn', 'error', 'fatal'], // all type
+		debug: !!props.debug,
+		todayHaveDelete: false // today is delete old files 
 	};
 
 	// ['black','red','green','yellow','blue','magenta','cyan','white','gray','redBright','greenBright','yellowBright','blueBright','magentaBright','cyanBright','whiteBright']
@@ -33,11 +36,10 @@ function Init (props) {
 			let data = typeof dataObj === 'object' ? JSON.stringify(dataObj) : dataObj;
 			let res = props.format || {};
 
-			let datePattern = res.datePattern || this.state.datePattern;
+			let paramsTimeFormat = null || this.state.paramsTimeFormat;
 			let type = res.type || this.state.type;
 			let params = res.params || this.state.params;
-
-			let time = moment().format(datePattern);
+			let time = moment().format(paramsTimeFormat);
 			let address = ip.address();
 
 			// Default all parameters

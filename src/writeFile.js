@@ -1,5 +1,5 @@
 /**
- * 输出日志到指定文件
+ * output logs to file
  * daiyunzhou 2018-12-08 13:24
  * last modify author: daiyunzhou
  * last modify date: 2018-12-08 13:24
@@ -44,6 +44,7 @@ function WriteFile (props){
             return  _.intersection(saveLevel,this.state.level);
         } catch (error) {
             this.catchErr(error);
+            return [];
         }
     };
     // Check if the log directory exists
@@ -56,6 +57,11 @@ function WriteFile (props){
             let saveLevel =file.saveLevel;
             let result = this.checkWrite(save,path,saveLevel);
 
+            // only the level had been setted can be write;
+            if (result.indexOf(level) === -1) {
+                return ;
+            }
+
             // create dir
             fse.ensureDir(path, function (err){
                 if (err) {
@@ -65,7 +71,6 @@ function WriteFile (props){
                     // write: true , cancel color 
                     let log = this.format(level,data,{write: true});
                     this.outputLogToFile(path,log);
-                    console.log(log);
                 }
             }.bind(this));
         } catch (error) {
@@ -82,13 +87,18 @@ function WriteFile (props){
             return path + '/' + fileName + '.' + extension;
         } catch (error) {
             this.catchErr(error);
+            return false;
         }
     };
     // write logs to file 
     this.outputLogToFile = function (path,data){
         try {
+            let filepath = this.filePath(path);
+            if (!filepath) {
+                return ;
+            }
             // With a callback:
-            fs.appendFile(this.filePath(path), data+'\n', function (err){
+            fs.appendFile(filepath, data+'\n', function (err){
                 if (err) throw err;
             });
         } catch (error) {
