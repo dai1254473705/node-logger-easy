@@ -69,7 +69,17 @@ function Init (props) {
 				if (type === 'json') {
 					return myResult;
 				} else {
-					return options.color ? chalk[options.color](JSON.stringify(myResult)) : JSON.stringify(myResult);
+					// check color 
+					let colord = function (){
+						if (options.color) {
+							return options.color;
+						}
+						if (props.color[level]) {
+							return props.color[level];
+						}
+						return false;
+					};
+					return colord() ? chalk[colord()](JSON.stringify(myResult)) : JSON.stringify(myResult);
 				}
 			} else {
 				// let levels = this.color()[level](level);
@@ -86,8 +96,18 @@ function Init (props) {
 				if (options.write) {
 					return dataString;
 				}
+				// check color 
+				let colord = function (){
+					if (options.color) {
+						return options.color;
+					}
+					if (props.color[level]) {
+						return props.color[level];
+					}
+					return false;
+				};
 				//  check whether you need to set the color
-				return options.color ? chalk[options.color](dataString) : dataString;
+				return colord() ? chalk[colord()](dataString) : dataString;
 			}
 		} catch (error) {
 			this.catchErr(error);
