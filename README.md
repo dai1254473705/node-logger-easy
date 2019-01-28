@@ -5,17 +5,22 @@ Export the log to the console or file, customize the output log format, support 
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Node.js Version][node-version-image]][node-version-url]
 
-## Desc
+## description
 
 If you want to see more:
-	1. 'git clone git@github.com:dai1254473705/node-logger-easy.git';
-	2. 'npm install'
-	3. 'npm run test'
+	
+	- 1. 'git clone git@github.com:dai1254473705/node-logger-easy.git';
+	
+	- 2. 'npm install'
+	
+	- 3. 'npm run test'
 
 ## Installation
 
 ```sh
-`npm install node-logger-easy --save` || `cnpm install node-logger-easy --save` || `yarn add node-logger-easy`
+`npm install node-logger-easy --save` 
+or `cnpm install node-logger-easy --save` 
+or `yarn add node-logger-easy`
 ```
 
 ## colors
@@ -94,6 +99,22 @@ logger.fatal('哈哈哈哈哈哈哈');
 logger.warn({haha: 213,asdf: 'sdf'},{color: 'blue',json: true});
 ```
 
++ jsonString format
+
+![jsonString](./src/images/jsonString.png)
+
++ json format
+
+![json](./src/images/json.png)
+
++ string format
+
+![string](./src/images/string.png)
+
++ logs file 
+
+![logs file](./src/images/logfile.png)
+
 ### method 
 
 > logger\[level](message,options);
@@ -122,7 +143,6 @@ You can specify the log color of the current output，Only show color in termina
 + logger.warn
 + logger.error
 + logger.fatal
-
 
 ### attention
 email Not completed, ongoing updates
